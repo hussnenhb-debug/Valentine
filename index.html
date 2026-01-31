@@ -29,6 +29,11 @@
       50% { transform: translateY(-15px); }
     }
 
+    .buttons {
+      position: relative;
+      margin-top: 20px;
+    }
+
     button {
       padding: 15px 25px;
       font-size: 18px;
@@ -37,7 +42,7 @@
       background: #ff4d88;
       color: white;
       cursor: pointer;
-      margin: 20px;
+      margin: 10px;
     }
 
     button:hover {
@@ -45,7 +50,7 @@
     }
 
     #nei {
-      position: absolute;
+      position: relative;
     }
 
     .heart {
@@ -81,12 +86,14 @@
 
   <img src="bamse.PNG" alt="Bamse" class="bamse">
 
-  <br>
+  <div class="buttons">
+    <button onclick="yesClicked()">Ja 💘</button>
+    <button id="nei">Nei 😢</button>
+  </div>
 
-  <button onclick="yesClicked()">Ja 💘</button>
-  <button id="nei">Nei 😢</button>
-
-  <div id="message">Yay! 💖🧸<br>Jeg gleder meg til Valentine med deg 💕</div>
+  <div id="message">
+    Yay! 💖🧸<br>
+  </div>
 
   <script>
     // ❤️ Hjerter
@@ -97,25 +104,23 @@
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.fontSize = (Math.random() * 20 + 10) + "px";
       document.body.appendChild(heart);
-
       setTimeout(() => heart.remove(), 5000);
     }
     setInterval(createHeart, 300);
 
-    // 😢 Flytt Nei-knappen
+    // 😢 Flytt Nei-knappen (kontrollert)
     const neiBtn = document.getElementById("nei");
 
     function moveButton() {
-      const x = Math.random() * (window.innerWidth - neiBtn.offsetWidth);
-      const y = Math.random() * (window.innerHeight - neiBtn.offsetHeight);
-      neiBtn.style.left = x + "px";
-      neiBtn.style.top = y + "px";
+      const x = Math.random() * 120 - 60;
+      const y = Math.random() * 80 - 40;
+      neiBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
     neiBtn.addEventListener("mouseover", moveButton);
     neiBtn.addEventListener("touchstart", moveButton);
 
-    // 💘 Ja-knappen
+    // 💘 Ja
     function yesClicked() {
       document.getElementById("message").style.display = "block";
     }
